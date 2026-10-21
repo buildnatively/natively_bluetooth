@@ -1,16 +1,17 @@
 name: flutter_bluetooth_web
 description: Web implementation of the flutter_bluetooth plugin.
 version: 5.0.0
+resolution: workspace
 homepage: https://github.com/buildnatively/flutter_bluetooth
 
 environment:
-  sdk: ^3.3.0
+  sdk: ^3.6.0
   flutter: '>=3.19.0'
 
 dependencies:
   flutter:
     sdk: flutter
-  flutter_bluetooth_platform_interface: '>=3.0.0 <5.0.0'
+  flutter_bluetooth_platform_interface: '>=5.0.0 <6.0.0'
   flutter_web_plugins:
     sdk: flutter
   web: '>=0.5.0 <2.0.0'

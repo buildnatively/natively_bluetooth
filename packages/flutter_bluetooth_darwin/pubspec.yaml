@@ -1,10 +1,11 @@
 name: flutter_bluetooth_darwin
 description: iOS and macOS implementation of the flutter_bluetooth plugin.
 version: 5.0.0
+resolution: workspace
 homepage: https://github.com/buildnatively/flutter_bluetooth
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
   flutter: '>=3.7.0'
 
 dependencies:

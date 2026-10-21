@@ -1,10 +1,13 @@
 name: flutter_bluetooth
 description: Flutter plugin for connecting and communicating with Bluetooth Low Energy devices.
 version: 1.35.6
+resolution: workspace
+workspace:
+  - example
 homepage: https://github.com/buildnatively/flutter_bluetooth
 
 environment:
-  sdk: ^3.0.0
+  sdk: ^3.6.0
   flutter: '>=3.7.0'
 
 dependencies:
