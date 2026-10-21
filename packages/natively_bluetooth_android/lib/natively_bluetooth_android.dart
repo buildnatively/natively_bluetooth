@@ -399,7 +399,9 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     dynamic arguments,
   ]) async {
     // initialize
-    await _initNativelyBluetooth();
+    if (method != 'setOptions' && method != 'setLogLevel') {
+      await _initNativelyBluetooth();
+    }
 
     // log args
     if (_logLevel == LogLevel.verbose) {

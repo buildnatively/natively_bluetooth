@@ -40,7 +40,7 @@ class BluetoothDescriptor {
   ///   - anytime `write()` is called
   ///   - when the device is disconnected it is cleared
   List<int> get lastValue {
-    String key = "$serviceUuid:$characteristicUuid:$descriptorUuid:${instanceId ?? 'noinst'}";
+    String key = "${primaryServiceUuid ?? ""}:$serviceUuid:$characteristicUuid:${instanceId ?? 'noinst'}:$descriptorUuid";
     return NativelyBluetooth._lastDescs[remoteId]?[key] ?? [];
   }
 
@@ -53,10 +53,10 @@ class BluetoothDescriptor {
       .where((p) => p.remoteId == remoteId)
       .where((p) => p.characteristicUuid == characteristicUuid)
       .where((p) => p.serviceUuid == serviceUuid)
-      .where((p) => p.descriptorUuid == descriptorUuid)
       .where((p) => p.primaryServiceUuid == primaryServiceUuid)
+      .where((p) => p.instanceId == instanceId)
+      .where((p) => p.descriptorUuid == descriptorUuid)
       .where((p) => p.success == true)
-      .where((p) => p.instanceId == null || p.instanceId == instanceId)
       .map((p) => p.value)
       .newStreamWithInitialValue(lastValue);
 
@@ -66,10 +66,10 @@ class BluetoothDescriptor {
       .where((p) => p.remoteId == remoteId)
       .where((p) => p.characteristicUuid == characteristicUuid)
       .where((p) => p.serviceUuid == serviceUuid)
-      .where((p) => p.descriptorUuid == descriptorUuid)
       .where((p) => p.primaryServiceUuid == primaryServiceUuid)
+      .where((p) => p.instanceId == instanceId)
+      .where((p) => p.descriptorUuid == descriptorUuid)
       .where((p) => p.success == true)
-      .where((p) => p.instanceId == null || p.instanceId == instanceId)
       .map((p) => p.value);
 
   /// Retrieves the value of a specified descriptor

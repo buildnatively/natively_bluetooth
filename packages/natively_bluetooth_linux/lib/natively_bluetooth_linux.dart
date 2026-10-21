@@ -331,6 +331,10 @@ final class NativelyBluetoothLinux extends NativelyBluetoothPlatform {
         },
       );
 
+      while (!device.servicesResolved) {
+        await Future.delayed(const Duration(milliseconds: 100));
+      }
+
       resetInstanceIds(device.remoteId);
       _onDiscoveredServicesController.add(
         BmDiscoverServicesResult(
@@ -778,7 +782,8 @@ final class NativelyBluetoothLinux extends NativelyBluetoothPlatform {
       await characteristic.stopNotify();
     }
 
-    return true;
+    // Linux has no CCCD write response for Dart to await.
+    return false;
   }
 
   @override

@@ -559,7 +559,7 @@ class NativelyBluetooth {
         if (r.success == true) {
           _lastDescs[r.remoteId] ??= {};
           _lastDescs[r.remoteId]![
-              "${r.serviceUuid}:${r.characteristicUuid}:${r.descriptorUuid}:${r.instanceId ?? 'noinst'}"] = r.value;
+              "${r.primaryServiceUuid ?? ""}:${r.serviceUuid}:${r.characteristicUuid}:${r.instanceId ?? 'noinst'}:${r.descriptorUuid}"] = r.value;
         }
       });
     } on UnimplementedError {
