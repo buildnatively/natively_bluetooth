@@ -1,0 +1,36 @@
+name: flutter_bluetooth_darwin
+description: iOS and macOS implementation of the flutter_bluetooth plugin.
+version: 5.0.0
+homepage: https://github.com/buildnatively/flutter_bluetooth
+
+environment:
+  sdk: ^3.0.0
+  flutter: '>=3.7.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_bluetooth_platform_interface: 5.0.0
+
+# uncomment for platform interface local development
+#dependency_overrides:
+#  flutter_bluetooth_platform_interface:
+#    path: ../flutter_bluetooth_platform_interface
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    implements: flutter_bluetooth
+    platforms:
+      ios:
+        pluginClass: FlutterBluetoothPlugin
+        dartPluginClass: FlutterBluetoothDarwin
+        sharedDarwinSource: true
+      macos:
+        pluginClass: FlutterBluetoothPlugin
+        dartPluginClass: FlutterBluetoothDarwin
+        sharedDarwinSource: true
