@@ -1,1 +1,1 @@
-packages/flutter_bluetooth/README.md
+packages/natively_bluetooth/README.md

@@ -1,13 +1,13 @@
-name: flutter_bluetooth_workspace
+name: natively_bluetooth_workspace
 publish_to: none
 
 environment:
   sdk: ^3.6.0
 
 workspace:
-  - packages/flutter_bluetooth
-  - packages/flutter_bluetooth_android
-  - packages/flutter_bluetooth_darwin
-  - packages/flutter_bluetooth_linux
-  - packages/flutter_bluetooth_platform_interface
-  - packages/flutter_bluetooth_web
+  - packages/natively_bluetooth
+  - packages/natively_bluetooth_android
+  - packages/natively_bluetooth_darwin
+  - packages/natively_bluetooth_linux
+  - packages/natively_bluetooth_platform_interface
+  - packages/natively_bluetooth_web

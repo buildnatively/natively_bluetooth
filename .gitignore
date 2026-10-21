@@ -31,4 +31,4 @@
 build/
 .pub/
 
-/packages/flutter_bluetooth/example/android/app/.cxx/
+/packages/natively_bluetooth/example/android/app/.cxx/
