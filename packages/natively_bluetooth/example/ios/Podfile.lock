@@ -1,21 +1,21 @@
 PODS:
   - Flutter (1.0.0)
-  - natively_bluetooth_darwin (0.0.2):
+  - natively_bluetooth (0.0.2):
     - Flutter
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
-  - natively_bluetooth_darwin (from `.symlinks/plugins/natively_bluetooth_darwin/darwin`)
+  - natively_bluetooth (from `.symlinks/plugins/natively_bluetooth/ios`)
 
 EXTERNAL SOURCES:
   Flutter:
     :path: Flutter
-  natively_bluetooth_darwin:
-    :path: ".symlinks/plugins/natively_bluetooth_darwin/darwin"
+  natively_bluetooth:
+    :path: ".symlinks/plugins/natively_bluetooth/ios"
 
 SPEC CHECKSUMS:
   Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
-  natively_bluetooth_darwin: 6cb031801990467c0ec52fe3b28c3ef7337ff9f4
+  natively_bluetooth: 4612c0941063559aa38efc040fdbae018de16abb
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 

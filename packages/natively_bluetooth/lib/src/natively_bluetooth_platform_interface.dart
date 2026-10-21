@@ -1,11 +1,11 @@
 import 'dart:async';
 
-import 'src/bluetooth_msgs.dart';
+import 'platform_interface/bluetooth_msgs.dart';
 
-export 'src/bluetooth_msgs.dart';
-export 'src/device_identifier.dart';
-export 'src/guid.dart';
-export 'src/log_level.dart';
+export 'platform_interface/bluetooth_msgs.dart';
+export 'platform_interface/device_identifier.dart';
+export 'platform_interface/guid.dart';
+export 'platform_interface/log_level.dart';
 
 /// The interface that implementations of natively_bluetooth must implement.
 abstract base class NativelyBluetoothPlatform {
@@ -93,7 +93,7 @@ abstract base class NativelyBluetoothPlatform {
 
   static final _logsController = StreamController<String>.broadcast();
   static Stream<String> get logs => _logsController.stream;
-  
+
   static void log(String s) {
     _logsController.add(s);
     // ignore: avoid_print

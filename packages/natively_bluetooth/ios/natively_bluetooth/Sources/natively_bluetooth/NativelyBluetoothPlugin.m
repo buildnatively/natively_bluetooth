@@ -2,7 +2,7 @@
 // All rights reserved. Use of this source code is governed by a
 // BSD-style license that can be found in the LICENSE file.
 
-#import "./include/natively_bluetooth_darwin/NativelyBluetoothPlugin.h"
+#import "./include/natively_bluetooth/NativelyBluetoothPlugin.h"
 #include <Foundation/NSObjCRuntime.h>
 
 #define Log(LEVEL, FORMAT, ...) [self log:LEVEL format:@"[Bluetooth-iOS] " FORMAT, ##__VA_ARGS__]

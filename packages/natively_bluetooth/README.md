@@ -60,17 +60,6 @@ flutter run
 * `BIG` : Significant overhauls. e.g. `1.0.0` -> `2.0.0`.
 * `MEDIUM` : Moderate improvements, feature updates, breaking chages. e.g. `1.0.0` -> `1.1.0`.
 * `SMALL` : Small fixes, patches, or refinements. `1.0.0` -> `1.0.1`.
-  
----
-
-`natively_bluetooth_android`, `natively_bluetooth_darwin`, and `natively_bluetooth_platform_interface` use [Semantic Versioning](https://semver.org).
-
-`MAJOR.MINOR.PATCH`:
-* `MAJOR` : Breaking API changes. e.g. `1.0.0` -> `2.0.0`.
-* `MINOR` : New features. e.g. `1.0.0` -> `1.1.0`.
-* `PATCH` : Bug fixes. e.g. `1.0.0` -> `1.0.1`.
-
-
 ## Usage
 
 ### 🔥 Error Handling 🔥

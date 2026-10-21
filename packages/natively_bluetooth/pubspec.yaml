@@ -13,9 +13,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  natively_bluetooth_android: 5.0.0
-  natively_bluetooth_darwin: 5.0.0
-  natively_bluetooth_platform_interface: 5.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -26,6 +23,11 @@ flutter:
   plugin:
     platforms:
       android:
-        default_package: natively_bluetooth_android
+        package: com.lib.natively_bluetooth
+        pluginClass: NativelyBluetoothPlugin
+        dartPluginClass: NativelyBluetoothAndroid
+        dartFileName: src/natively_bluetooth_android.dart
       ios:
-        default_package: natively_bluetooth_darwin
+        pluginClass: NativelyBluetoothPlugin
+        dartPluginClass: NativelyBluetoothIOS
+        dartFileName: src/natively_bluetooth_ios.dart

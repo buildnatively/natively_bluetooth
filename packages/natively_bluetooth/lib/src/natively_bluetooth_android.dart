@@ -3,7 +3,7 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:natively_bluetooth_platform_interface/natively_bluetooth_platform_interface.dart';
+import 'natively_bluetooth_platform_interface.dart';
 
 final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
   @visibleForTesting
@@ -13,21 +13,34 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
   var _logLevel = LogLevel.none;
   var _logColor = true;
 
-  final _onAdapterStateChangedController = StreamController<BmBluetoothAdapterState>.broadcast();
-  final _onBondStateChangedController = StreamController<BmBondStateResponse>.broadcast();
-  final _onCharacteristicReceivedController = StreamController<BmCharacteristicData>.broadcast();
-  final _onCharacteristicWrittenController = StreamController<BmCharacteristicData>.broadcast();
-  final _onConnectionStateChangedController = StreamController<BmConnectionStateResponse>.broadcast();
-  final _onDescriptorReadController = StreamController<BmDescriptorData>.broadcast();
-  final _onDescriptorWrittenController = StreamController<BmDescriptorData>.broadcast();
-  final _onDetachedFromEngineController = StreamController<BmDetachedFromEngineResponse>.broadcast();
-  final _onDiscoveredServicesController = StreamController<BmDiscoverServicesResult>.broadcast();
-  final _onMtuChangedController = StreamController<BmMtuChangedResponse>.broadcast();
+  final _onAdapterStateChangedController =
+      StreamController<BmBluetoothAdapterState>.broadcast();
+  final _onBondStateChangedController =
+      StreamController<BmBondStateResponse>.broadcast();
+  final _onCharacteristicReceivedController =
+      StreamController<BmCharacteristicData>.broadcast();
+  final _onCharacteristicWrittenController =
+      StreamController<BmCharacteristicData>.broadcast();
+  final _onConnectionStateChangedController =
+      StreamController<BmConnectionStateResponse>.broadcast();
+  final _onDescriptorReadController =
+      StreamController<BmDescriptorData>.broadcast();
+  final _onDescriptorWrittenController =
+      StreamController<BmDescriptorData>.broadcast();
+  final _onDetachedFromEngineController =
+      StreamController<BmDetachedFromEngineResponse>.broadcast();
+  final _onDiscoveredServicesController =
+      StreamController<BmDiscoverServicesResult>.broadcast();
+  final _onMtuChangedController =
+      StreamController<BmMtuChangedResponse>.broadcast();
   final _onNameChangedController = StreamController<BmNameChanged>.broadcast();
   final _onReadRssiController = StreamController<BmReadRssiResult>.broadcast();
-  final _onScanResponseController = StreamController<BmScanResponse>.broadcast();
-  final _onServicesResetController = StreamController<BmBluetoothDevice>.broadcast();
-  final _onTurnOnResponseController = StreamController<BmTurnOnResponse>.broadcast();
+  final _onScanResponseController =
+      StreamController<BmScanResponse>.broadcast();
+  final _onServicesResetController =
+      StreamController<BmBluetoothDevice>.broadcast();
+  final _onTurnOnResponseController =
+      StreamController<BmTurnOnResponse>.broadcast();
 
   @override
   Stream<BmBluetoothAdapterState> get onAdapterStateChanged {
@@ -113,9 +126,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmClearGattCacheRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'clearGattCache',
-      request.remoteId.str,
-    ) == true;
+          'clearGattCache',
+          request.remoteId.str,
+        ) ==
+        true;
   }
 
   @override
@@ -123,9 +137,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmConnectRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'connect',
-      request.toMap(),
-    ) == true;
+          'connect',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -133,9 +148,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmCreateBondRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'createBond',
-      request.toMap(),
-    ) == true;
+          'createBond',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -143,9 +159,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmDisconnectRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'disconnect',
-      request.remoteId.str,
-    ) == true;
+          'disconnect',
+          request.remoteId.str,
+        ) ==
+        true;
   }
 
   @override
@@ -153,9 +170,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmDiscoverServicesRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'discoverServices',
-      request.remoteId.str,
-    ) == true;
+          'discoverServices',
+          request.remoteId.str,
+        ) ==
+        true;
   }
 
   @override
@@ -230,8 +248,9 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmIsSupportedRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'isSupported',
-    ) == true;
+          'isSupported',
+        ) ==
+        true;
   }
 
   @override
@@ -239,9 +258,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmReadCharacteristicRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'readCharacteristic',
-      request.toMap(),
-    ) == true;
+          'readCharacteristic',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -249,9 +269,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmReadDescriptorRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'readDescriptor',
-      request.toMap(),
-    ) == true;
+          'readDescriptor',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -259,9 +280,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmReadRssiRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'readRssi',
-      request.remoteId.str,
-    ) == true;
+          'readRssi',
+          request.remoteId.str,
+        ) ==
+        true;
   }
 
   @override
@@ -269,9 +291,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmRemoveBondRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'removeBond',
-      request.remoteId.str,
-    ) == true;
+          'removeBond',
+          request.remoteId.str,
+        ) ==
+        true;
   }
 
   @override
@@ -279,9 +302,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmConnectionPriorityRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'requestConnectionPriority',
-      request.toMap(),
-    ) == true;
+          'requestConnectionPriority',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -289,9 +313,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmMtuChangeRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'requestMtu',
-      request.toMap(),
-    ) == true;
+          'requestMtu',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -302,9 +327,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     _logColor = request.logColor;
 
     return await _invokeMethod<bool>(
-      'setLogLevel',
-      request.logLevel.index,
-    ) == true;
+          'setLogLevel',
+          request.logLevel.index,
+        ) ==
+        true;
   }
 
   @override
@@ -312,9 +338,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmSetNotifyValueRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'setNotifyValue',
-      request.toMap(),
-    ) == true;
+          'setNotifyValue',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -322,9 +349,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmSetOptionsRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'setOptions',
-      request.toMap(),
-    ) == true;
+          'setOptions',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -332,9 +360,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmPreferredPhy request,
   ) async {
     return await _invokeMethod<bool>(
-      'setPreferredPhy',
-      request.toMap(),
-    ) == true;
+          'setPreferredPhy',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -342,9 +371,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmScanSettings request,
   ) async {
     return await _invokeMethod<bool>(
-      'startScan',
-      request.toMap(),
-    ) == true;
+          'startScan',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -352,8 +382,9 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmStopScanRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'stopScan',
-    ) == true;
+          'stopScan',
+        ) ==
+        true;
   }
 
   @override
@@ -361,8 +392,9 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmTurnOffRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'turnOff',
-    ) == true;
+          'turnOff',
+        ) ==
+        true;
   }
 
   @override
@@ -370,8 +402,9 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmTurnOnRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'turnOn',
-    ) == true;
+          'turnOn',
+        ) ==
+        true;
   }
 
   @override
@@ -379,9 +412,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmWriteCharacteristicRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'writeCharacteristic',
-      request.toMap(),
-    ) == true;
+          'writeCharacteristic',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   @override
@@ -389,9 +423,10 @@ final class NativelyBluetoothAndroid extends NativelyBluetoothPlatform {
     BmWriteDescriptorRequest request,
   ) async {
     return await _invokeMethod<bool>(
-      'writeDescriptor',
-      request.toMap(),
-    ) == true;
+          'writeDescriptor',
+          request.toMap(),
+        ) ==
+        true;
   }
 
   Future<T?> _invokeMethod<T>(

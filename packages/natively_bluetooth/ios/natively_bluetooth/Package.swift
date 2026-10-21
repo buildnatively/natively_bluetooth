@@ -4,17 +4,17 @@
 import PackageDescription
 
 let package = Package(
-    name: "natively_bluetooth_darwin",
+    name: "natively_bluetooth",
     platforms: [
         .iOS("12.0"),
     ],
     products: [
-        .library(name: "natively-bluetooth-darwin", targets: ["natively_bluetooth_darwin"])
+        .library(name: "natively-bluetooth", targets: ["natively_bluetooth"])
     ],
     dependencies: [],
     targets: [
         .target(
-            name: "natively_bluetooth_darwin",
+            name: "natively_bluetooth",
             dependencies: [],
             resources: [
                 // TODO: If your plugin requires a privacy manifest
@@ -29,7 +29,7 @@ let package = Package(
                 // https://developer.apple.com/documentation/xcode/bundling-resources-with-a-swift-package
             ],
             cSettings: [
-                .headerSearchPath("include/natively_bluetooth_darwin")
+                .headerSearchPath("include/natively_bluetooth")
             ]
         )
     ]

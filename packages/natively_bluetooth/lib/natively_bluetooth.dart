@@ -7,9 +7,10 @@ library;
 import 'dart:async';
 import 'dart:io';
 
-import 'package:natively_bluetooth_platform_interface/natively_bluetooth_platform_interface.dart';
+import 'src/natively_bluetooth_platform_interface.dart';
 
-export 'package:natively_bluetooth_platform_interface/natively_bluetooth_platform_interface.dart' show DeviceIdentifier, Guid, LogLevel, PhySupport;
+export 'src/natively_bluetooth_platform_interface.dart'
+    show DeviceIdentifier, Guid, LogLevel, PhySupport;
 
 part 'src/bluetooth_characteristic.dart';
 part 'src/bluetooth_descriptor.dart';
