@@ -7,7 +7,6 @@ let package = Package(
     name: "natively_bluetooth_darwin",
     platforms: [
         .iOS("12.0"),
-        .macOS("10.14"),
     ],
     products: [
         .library(name: "natively-bluetooth-darwin", targets: ["natively_bluetooth_darwin"])

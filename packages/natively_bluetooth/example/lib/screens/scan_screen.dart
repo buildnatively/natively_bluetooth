@@ -68,12 +68,6 @@ class _ScanScreenState extends State<ScanScreen> {
           // Guid("1800"), // generic access
           // Guid("6e400001-b5a3-f393-e0a9-e50e24dcca9e"), // Nordic UART
         ],
-        webOptionalServices: [
-          Guid("180f"), // battery
-          Guid("180a"), // device info
-          Guid("1800"), // generic access
-          Guid("6e400001-b5a3-f393-e0a9-e50e24dcca9e"), // Nordic UART
-        ],
       );
     } catch (e, backtrace) {
       Snackbar.show(ABC.b, prettyException("Start Scan Error:", e), success: false);

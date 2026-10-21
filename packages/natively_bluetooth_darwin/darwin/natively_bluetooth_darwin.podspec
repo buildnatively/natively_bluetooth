@@ -14,9 +14,7 @@ Pod::Spec.new do |s|
   s.source_files        = 'natively_bluetooth_darwin/Sources/natively_bluetooth_darwin/**/*.{h,m}'
   s.public_header_files = 'natively_bluetooth_darwin/Sources/natively_bluetooth_darwin/include/**/*.h'
   s.ios.dependency 'Flutter'
-  s.osx.dependency 'FlutterMacOS'
   s.ios.deployment_target = '12.0'
-  s.osx.deployment_target = '10.14'
   s.framework = 'CoreBluetooth'
   s.pod_target_xcconfig = { 'DEFINES_MODULE' => 'YES', }
 end

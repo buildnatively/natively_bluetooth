@@ -1,6 +1,5 @@
 import 'dart:io';
 
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:natively_bluetooth/natively_bluetooth.dart';
 
@@ -34,7 +33,7 @@ class BluetoothOffScreen extends StatelessWidget {
         child: const Text('TURN ON'),
         onPressed: () async {
           try {
-            if (!kIsWeb && Platform.isAndroid) {
+            if (Platform.isAndroid) {
               await NativelyBluetooth.turnOn();
             }
           } catch (e, backtrace) {
@@ -59,7 +58,7 @@ class BluetoothOffScreen extends StatelessWidget {
             children: <Widget>[
               buildBluetoothOffIcon(context),
               buildTitle(context),
-              if (!kIsWeb && Platform.isAndroid) buildTurnOnButton(context),
+              if (Platform.isAndroid) buildTurnOnButton(context),
             ],
           ),
         ),

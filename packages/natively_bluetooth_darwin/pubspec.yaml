@@ -1,5 +1,5 @@
 name: natively_bluetooth_darwin
-description: iOS and macOS implementation of the natively_bluetooth plugin.
+description: iOS implementation of the natively_bluetooth plugin.
 version: 5.0.0
 resolution: workspace
 homepage: https://github.com/buildnatively/natively_bluetooth
@@ -28,10 +28,6 @@ flutter:
     implements: natively_bluetooth
     platforms:
       ios:
-        pluginClass: NativelyBluetoothPlugin
-        dartPluginClass: NativelyBluetoothDarwin
-        sharedDarwinSource: true
-      macos:
         pluginClass: NativelyBluetoothPlugin
         dartPluginClass: NativelyBluetoothDarwin
         sharedDarwinSource: true

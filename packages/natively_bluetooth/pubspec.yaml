@@ -15,9 +15,7 @@ dependencies:
     sdk: flutter
   natively_bluetooth_android: 5.0.0
   natively_bluetooth_darwin: 5.0.0
-  natively_bluetooth_linux: 5.0.0
   natively_bluetooth_platform_interface: 5.0.0
-  natively_bluetooth_web: 5.0.0
 
 dev_dependencies:
   flutter_lints: ^5.0.0
@@ -31,9 +29,3 @@ flutter:
         default_package: natively_bluetooth_android
       ios:
         default_package: natively_bluetooth_darwin
-      linux:
-        default_package: natively_bluetooth_linux
-      macos:
-        default_package: natively_bluetooth_darwin
-      web:
-        default_package: natively_bluetooth_web

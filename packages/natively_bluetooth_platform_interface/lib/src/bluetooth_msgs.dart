@@ -81,7 +81,6 @@ class BmScanSettings {
   final int androidScanMode;
   final bool androidUsesFineLocation;
   final bool androidCheckLocationServices;
-  final List<Guid> webOptionalServices;
 
   BmScanSettings({
     required this.withServices,
@@ -96,7 +95,6 @@ class BmScanSettings {
     required this.androidScanMode,
     required this.androidUsesFineLocation,
     this.androidCheckLocationServices = true,
-    required this.webOptionalServices,
   });
 
   Map<dynamic, dynamic> toMap() {
@@ -113,7 +111,6 @@ class BmScanSettings {
     data['android_scan_mode'] = androidScanMode;
     data['android_uses_fine_location'] = androidUsesFineLocation;
     data['android_check_location_services'] = androidCheckLocationServices;
-    data['web_optional_services'] = webOptionalServices.map((s) => s.str).toList();
     return data;
   }
 }
@@ -128,7 +125,7 @@ class BmScanAdvertisement {
   final String? advName;
   final bool connectable;
   final int? txPowerLevel;
-  final int? appearance; // not supported on iOS / macOS
+  final int? appearance; // not supported on iOS
   final Map<int, List<int>> manufacturerData;
   final Map<Guid, List<int>> serviceData;
   final List<Guid> serviceUuids;

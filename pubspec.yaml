@@ -8,6 +8,4 @@ workspace:
   - packages/natively_bluetooth
   - packages/natively_bluetooth_android
   - packages/natively_bluetooth_darwin
-  - packages/natively_bluetooth_linux
   - packages/natively_bluetooth_platform_interface
-  - packages/natively_bluetooth_web

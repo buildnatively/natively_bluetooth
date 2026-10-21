@@ -2,7 +2,6 @@ PODS:
   - Flutter (1.0.0)
   - natively_bluetooth_darwin (0.0.2):
     - Flutter
-    - FlutterMacOS
 
 DEPENDENCIES:
   - Flutter (from `Flutter`)
@@ -15,9 +14,9 @@ EXTERNAL SOURCES:
     :path: ".symlinks/plugins/natively_bluetooth_darwin/darwin"
 
 SPEC CHECKSUMS:
-  Flutter: e0871f40cf51350855a761d2e70bf5af5b9b5de7
-  natively_bluetooth_darwin: 904ed52825285a15f60e9d90312337a09f11a785
+  Flutter: cabc95a1d2626b1b06e7179b784ebcf0c0cde467
+  natively_bluetooth_darwin: 6cb031801990467c0ec52fe3b28c3ef7337ff9f4
 
 PODFILE CHECKSUM: 819463e6a0290f5a72f145ba7cde16e8b6ef0796
 
-COCOAPODS: 1.16.2
+COCOAPODS: 1.17.0

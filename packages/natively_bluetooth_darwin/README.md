@@ -1,6 +1,6 @@
 # natively_bluetooth_darwin
 
-The iOS and macOS implementation of [`natively_bluetooth`][1].
+The iOS implementation of [`natively_bluetooth`][1].
 
 ## Usage
 

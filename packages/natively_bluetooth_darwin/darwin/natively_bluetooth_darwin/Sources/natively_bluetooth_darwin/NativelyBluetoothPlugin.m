@@ -232,12 +232,7 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
         }
         else if ([@"getAdapterName" isEqualToString:call.method])
         {
-    #if TARGET_OS_IOS
             result([[UIDevice currentDevice] name]);
-    #else // MacOS
-            // TODO: support this via hostname?
-            result(@"Mac Bluetooth Adapter");
-    #endif
         }
         if ([@"getAdapterState" isEqualToString:call.method])
         {
@@ -308,7 +303,7 @@ typedef NS_ENUM(NSUInteger, LogLevel) {
             // If any custom filter is set then we cannot filter by services.
             // Why? An advertisement can match either the service filter *or*
             // the custom filter. It does not have to match both. So we cannot have
-            // iOS & macOS filtering out any advertisements.
+            // iOS filtering out any advertisements.
             if (hasCustomFilters) {
                 services = [NSArray array];
             }

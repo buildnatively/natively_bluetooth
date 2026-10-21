@@ -35,18 +35,13 @@ If you are new to Bluetooth, you should start by reading BLE tutorials.
 
 ## Cross-Platform Bluetooth Low Energy
 
-The plugin supports nearly every feature on all supported platforms: iOS, macOS, Android, Linux, Web.
+The plugin supports Android and iOS.
 
 ## No Dependencies
 
-The plugin has zero dependencies besides Flutter, Android, iOS, and macOS themselves.
+The plugin has no dependencies beyond Flutter, Android, and iOS.
 
 This makes it stable and easy to maintain.
-
-## Windows Support
-
-Use a separately maintained Windows implementation if you need Windows support.
-
 
 ## Example
 
@@ -68,7 +63,7 @@ flutter run
   
 ---
 
-`natively_bluetooth_android`, `natively_bluetooth_darwin`, `natively_bluetooth_linux`, `natively_bluetooth_platform_interface`, `natively_bluetooth_web` use [Semantic Versioning](https://semver.org). 
+`natively_bluetooth_android`, `natively_bluetooth_darwin`, and `natively_bluetooth_platform_interface` use [Semantic Versioning](https://semver.org).
 
 `MAJOR.MINOR.PATCH`:
 * `MAJOR` : Breaking API changes. e.g. `1.0.0` -> `2.0.0`.
@@ -134,7 +129,7 @@ var subscription = NativelyBluetooth.adapterState.listen((BluetoothAdapterState 
 
 // turn on bluetooth ourself if we can
 // for iOS, the user controls bluetooth enable/disable
-if (!kIsWeb && Platform.isAndroid) {
+if (Platform.isAndroid) {
     await NativelyBluetooth.turnOn();
 }
 
@@ -249,7 +244,7 @@ await device.connect(autoConnect: true);
 
 On Android, we request an mtu of 512 by default during connection (see: `connect` function arguments).
 
-On iOS & macOS, the mtu is negotiated automatically, typically 135 to 255.
+On iOS, the mtu is negotiated automatically, typically 135 to 255.
 
 ```dart
 final subscription = device.mtu.listen((int mtu) {
@@ -261,7 +256,7 @@ final subscription = device.mtu.listen((int mtu) {
 device.cancelWhenDisconnected(subscription);
 
 // You can also manually change the mtu yourself.
-if (!kIsWeb && Platform.isAndroid) {
+if (Platform.isAndroid) {
     await device.requestMtu(512);
 }
 ```
@@ -580,13 +575,6 @@ In the **ios/Runner/Info.plist** let’s add:
 
 For location permissions on iOS see more at: [https://developer.apple.com/documentation/corelocation/requesting_authorization_for_location_services](https://developer.apple.com/documentation/corelocation/requesting_authorization_for_location_services)
 
-### Add permissions for macOS 
-
-Make sure you have granted access to the Bluetooth hardware:
-
-`Xcode -> Runners -> Targets -> Runner-> Signing & Capabilities -> App Sandbox -> Hardware -> Enable Bluetooth`
-
-
 ## Using Ble in App Background
 
 **This is an advanced use case**. The plugin does not support everything. You may have to fork it. PRs are welcome.
@@ -626,90 +614,90 @@ Note: When functionality is unsupported on a platform, sensible defaults are ret
 * ⚡ = Synchronous
 * 🔥 = Can fail
 
-|                     | Android | iOS | Linux | macOS | Web | Description                                                 |
-|---------------------|---------|-----|-------|-------|-----|-------------------------------------------------------------|
-| setLogLevel         | ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Configure plugin log level                                  |
-| setOptions          | ✔️      | ✔️  | ❌     | ✔️    | ❌   | Set configurable bluetooth options                          |
-| isSupported         | ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Checks whether the device supports Bluetooth                |
-| turnOn            🔥| ✔️      | ❌   | ✔️    | ❌     | ❌   | Turns on the bluetooth adapter                              |
-| turnOff           🔥| ✔️      | ❌   | ✔️    | ❌     | ❌   | Turns off the bluetooth adapter                             |
-| adapterStateNow    ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Current state of the bluetooth adapter                      |
-| adapterState      🌀| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Stream of on & off states of the bluetooth adapter          |
-| startScan         🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Starts a scan for Ble devices                               |
-| stopScan          🔥| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Stop an existing scan for Ble devices                       |
-| onScanResults   🌀🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of live scan results                                 |
-| scanResults     🌀🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of live scan results or previous results             |
-| lastScanResults    ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The most recent scan results                                |
-| isScanning        🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of current scanning state                            |
-| isScanningNow      ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Is a scan currently running?                                |
-| connectedDevices   ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | List of devices connected to *your app*                     |
-| systemDevices     🔥| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | List of devices connected to the system, even by other apps |
-| getPhySupport       | ✔️      | ❌   | ❌     | ❌     | ❌   | Get supported bluetooth phy codings                         |
+|                     | Android | iOS | Description                                                 |
+|---------------------|---------|-----|-------------------------------------------------------------|
+| setLogLevel         | ✔️      | ✔️  | Configure plugin log level                                  |
+| setOptions          | ✔️      | ✔️  | Set configurable bluetooth options                          |
+| isSupported         | ✔️      | ✔️  | Checks whether the device supports Bluetooth                |
+| turnOn            🔥| ✔️      | ❌   | Turns on the bluetooth adapter                              |
+| turnOff           🔥| ✔️      | ❌   | Turns off the bluetooth adapter                             |
+| adapterStateNow    ⚡| ✔️      | ✔️  | Current state of the bluetooth adapter                      |
+| adapterState      🌀| ✔️      | ✔️  | Stream of on & off states of the bluetooth adapter          |
+| startScan         🔥| ✔️      | ✔️  | Starts a scan for Ble devices                               |
+| stopScan          🔥| ✔️      | ✔️  | Stop an existing scan for Ble devices                       |
+| onScanResults   🌀🔥| ✔️      | ✔️  | Stream of live scan results                                 |
+| scanResults     🌀🔥| ✔️      | ✔️  | Stream of live scan results or previous results             |
+| lastScanResults    ⚡| ✔️      | ✔️  | The most recent scan results                                |
+| isScanning        🌀| ✔️      | ✔️  | Stream of current scanning state                            |
+| isScanningNow      ⚡| ✔️      | ✔️  | Is a scan currently running?                                |
+| connectedDevices   ⚡| ✔️      | ✔️  | List of devices connected to *your app*                     |
+| systemDevices     🔥| ✔️      | ✔️  | List of devices connected to the system, even by other apps |
+| getPhySupport       | ✔️      | ❌   | Get supported bluetooth phy codings                         |
 
 ### Events API
 
-|                            | Android | iOS | Linux | macOS | Web | Description                                            |
-|----------------------------|---------|-----|-------|-------|-----|--------------------------------------------------------|
-| onConnectionStateChanged 🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of connection changes of *all devices*          |
-| onMtuChanged             🌀| ✔️      | ✔️  | ❌     | ✔️    | ❌   | Stream of mtu changes of *all devices*                 |
-| onReadRssi               🌀| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Stream of rssi reads of *all devices*                  |
-| onServicesReset          🌀| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Stream of services resets of *all devices*             |
-| onDiscoveredServices     🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of services discovered of *all devices*         |
-| onCharacteristicReceived 🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of characteristic value reads of *all devices*  |
-| onCharacteristicWritten  🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of characteristic value writes of *all devices* |
-| onDescriptorRead         🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of descriptor value reads of *all devices*      |
-| onDescriptorWritten      🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of descriptor value writes of *all devices*     |
-| onBondStateChanged       🌀| ✔️      | ❌   | ✔️    | ❌     | ❌   | Stream of bond state changes of *all devices*          |
-| onNameChanged            🌀| ❌       | ✔️  | ✔️    | ✔️    | ❌   | Stream of name changes of *all devices*                |
+|                            | Android | iOS | Description                                            |
+|----------------------------|---------|-----|--------------------------------------------------------|
+| onConnectionStateChanged 🌀| ✔️      | ✔️  | Stream of connection changes of *all devices*          |
+| onMtuChanged             🌀| ✔️      | ✔️  | Stream of mtu changes of *all devices*                 |
+| onReadRssi               🌀| ✔️      | ✔️  | Stream of rssi reads of *all devices*                  |
+| onServicesReset          🌀| ✔️      | ✔️  | Stream of services resets of *all devices*             |
+| onDiscoveredServices     🌀| ✔️      | ✔️  | Stream of services discovered of *all devices*         |
+| onCharacteristicReceived 🌀| ✔️      | ✔️  | Stream of characteristic value reads of *all devices*  |
+| onCharacteristicWritten  🌀| ✔️      | ✔️  | Stream of characteristic value writes of *all devices* |
+| onDescriptorRead         🌀| ✔️      | ✔️  | Stream of descriptor value reads of *all devices*      |
+| onDescriptorWritten      🌀| ✔️      | ✔️  | Stream of descriptor value writes of *all devices*     |
+| onBondStateChanged       🌀| ✔️      | ❌   | Stream of bond state changes of *all devices*          |
+| onNameChanged            🌀| ❌       | ✔️  | Stream of name changes of *all devices*                |
 
 ### BluetoothDevice API
 
-|                             | Android | iOS | Linux | macOS | Web | Description                                                |
-|-----------------------------|---------|-----|-------|-------|-----|------------------------------------------------------------|
-| platformName               ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The platform preferred name of the device                  |
-| advName                    ⚡| ✔️      | ✔️  | ❌     | ✔️    | ❌   | The advertised name of the device found during scanning    |
-| connect                   🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Establishes a connection to the device                     |
-| disconnect                🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Cancels an active or pending connection to the device      |
-| isConnected                ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Is this device currently connected to *your app*?          |
-| isDisconnected             ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Is this device currently disconnected from *your app*?     |
-| connectionState           🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of connection changes for the Bluetooth Device      |
-| discoverServices          🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Discover services                                          |
-| servicesList               ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The current list of available services                     |
-| onServicesReset           🌀| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | The services changed & must be rediscovered                |
-| mtu                       🌀| ✔️      | ✔️  | ❌     | ✔️    | ❌   | Stream of current mtu value + changes                      |
-| mtuNow                     ⚡| ✔️      | ✔️  | ❌     | ✔️    | ❌   | The current mtu value                                      |
-| readRssi                  🔥| ✔️      | ✔️  | ✔️    | ✔️    | ❌   | Read RSSI from a connected device                          |
-| requestMtu                🔥| ✔️      | ❌   | ❌     | ❌     | ❌   | Request to change the MTU for the device                   |
-| requestConnectionPriority 🔥| ✔️      | ❌   | ❌     | ❌     | ❌   | Request to update a high priority, low latency connection  |
-| bondState                 🌀| ✔️      | ❌   | ✔️    | ❌     | ❌   | Stream of device bond state. Can be useful on Android      |
-| createBond                🔥| ✔️      | ❌   | ✔️    | ❌     | ❌   | Force a system pairing dialogue to show, if needed         |
-| removeBond                  | ✔️      | ❌   | ✔️    | ❌     | ❌   | Remove Bluetooth Bond of device                            |
-| setPreferredPhy             | ✔️      | ❌   | ❌     | ❌     | ❌   | Set preferred RX and TX phy for connection and phy options |
-| clearGattCache              | ✔️      | ❌   | ❌     | ❌     | ❌   | Clear android cache of service discovery results           |
+|                             | Android | iOS | Description                                                |
+|-----------------------------|---------|-----|------------------------------------------------------------|
+| platformName               ⚡| ✔️      | ✔️  | The platform preferred name of the device                  |
+| advName                    ⚡| ✔️      | ✔️  | The advertised name of the device found during scanning    |
+| connect                   🔥| ✔️      | ✔️  | Establishes a connection to the device                     |
+| disconnect                🔥| ✔️      | ✔️  | Cancels an active or pending connection to the device      |
+| isConnected                ⚡| ✔️      | ✔️  | Is this device currently connected to *your app*?          |
+| isDisconnected             ⚡| ✔️      | ✔️  | Is this device currently disconnected from *your app*?     |
+| connectionState           🌀| ✔️      | ✔️  | Stream of connection changes for the Bluetooth Device      |
+| discoverServices          🔥| ✔️      | ✔️  | Discover services                                          |
+| servicesList               ⚡| ✔️      | ✔️  | The current list of available services                     |
+| onServicesReset           🌀| ✔️      | ✔️  | The services changed & must be rediscovered                |
+| mtu                       🌀| ✔️      | ✔️  | Stream of current mtu value + changes                      |
+| mtuNow                     ⚡| ✔️      | ✔️  | The current mtu value                                      |
+| readRssi                  🔥| ✔️      | ✔️  | Read RSSI from a connected device                          |
+| requestMtu                🔥| ✔️      | ❌   | Request to change the MTU for the device                   |
+| requestConnectionPriority 🔥| ✔️      | ❌   | Request to update a high priority, low latency connection  |
+| bondState                 🌀| ✔️      | ❌   | Stream of device bond state. Can be useful on Android      |
+| createBond                🔥| ✔️      | ❌   | Force a system pairing dialogue to show, if needed         |
+| removeBond                  | ✔️      | ❌   | Remove Bluetooth Bond of device                            |
+| setPreferredPhy             | ✔️      | ❌   | Set preferred RX and TX phy for connection and phy options |
+| clearGattCache              | ✔️      | ❌   | Clear android cache of service discovery results           |
 
 ### BluetoothCharacteristic API
 
-|                   | Android | iOS | Linux | macOS | Web | Description                                                     |
-|-------------------|---------|-----|-------|-------|-----|-----------------------------------------------------------------|
-| uuid             ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The uuid of characteristic                                      |
-| read            🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Retrieves the value of the characteristic                       |
-| write           🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Writes the value of the characteristic                          |
-| setNotifyValue  🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Sets notifications or indications on the characteristic         |
-| isNotifying      ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Are notifications or indications currently enabled              |
-| onValueReceived 🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of characteristic value updates received from the device |
-| lastValue        ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The most recent value of the characteristic                     |
-| lastValueStream 🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of onValueReceived + writes                              |
+|                   | Android | iOS | Description                                                     |
+|-------------------|---------|-----|-----------------------------------------------------------------|
+| uuid             ⚡| ✔️      | ✔️  | The uuid of characteristic                                      |
+| read            🔥| ✔️      | ✔️  | Retrieves the value of the characteristic                       |
+| write           🔥| ✔️      | ✔️  | Writes the value of the characteristic                          |
+| setNotifyValue  🔥| ✔️      | ✔️  | Sets notifications or indications on the characteristic         |
+| isNotifying      ⚡| ✔️      | ✔️  | Are notifications or indications currently enabled              |
+| onValueReceived 🌀| ✔️      | ✔️  | Stream of characteristic value updates received from the device |
+| lastValue        ⚡| ✔️      | ✔️  | The most recent value of the characteristic                     |
+| lastValueStream 🌀| ✔️      | ✔️  | Stream of onValueReceived + writes                              |
 
 ### BluetoothDescriptor API
 
-|                   | Android | iOS | Linux | macOS | Web | Description                               |
-|-------------------|---------|-----|-------|-------|-----|-------------------------------------------|
-| uuid             ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The uuid of descriptor                    |
-| read            🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Retrieves the value of the descriptor     |
-| write           🔥| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Writes the value of the descriptor        |
-| onValueReceived 🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of descriptor value reads & writes |
-| lastValue        ⚡| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | The most recent value of the descriptor   |
-| lastValueStream 🌀| ✔️      | ✔️  | ✔️    | ✔️    | ✔️  | Stream of onValueReceived + writes        |
+|                   | Android | iOS | Description                               |
+|-------------------|---------|-----|-------------------------------------------|
+| uuid             ⚡| ✔️      | ✔️  | The uuid of descriptor                    |
+| read            🔥| ✔️      | ✔️  | Retrieves the value of the descriptor     |
+| write           🔥| ✔️      | ✔️  | Writes the value of the descriptor        |
+| onValueReceived 🌀| ✔️      | ✔️  | Stream of descriptor value reads & writes |
+| lastValue        ⚡| ✔️      | ✔️  | The most recent value of the descriptor   |
+| lastValueStream 🌀| ✔️      | ✔️  | Stream of onValueReceived + writes        |
 
 ## Debugging
 
@@ -746,7 +734,7 @@ Scanning:
 Connecting:
 - [Connection fails](#connection-fails)
 - [connectionState is called multiple times](#connectionstate-is-called-multiple-times)
-- [remoteId is different on Android vs iOS](#the-remoteid-is-different-on-android-versus-ios--macos)
+- [remoteId is different on Android vs iOS](#the-remoteid-is-different-on-android-versus-ios)
 - [iOS: "[Error] The connection has timed out unexpectedly."](#ios-error-the-connection-has-timed-out-unexpectedly)
 
 Reading & Writing:
@@ -930,11 +918,11 @@ subscription.cancel()
 
 ---
 
-### The remoteId is different on Android versus iOS & macOS
+### The remoteId is different on Android versus iOS
 
 This is expected. There is no way to avoid it.
 
-For privacy, iOS & macOS use a randomly generated uuid. This uuid will periodically change.
+For privacy, iOS uses a randomly generated uuid. This uuid will periodically change.
 
 e.g. `6920a902-ba0e-4a13-a35f-6bc91161c517`
 

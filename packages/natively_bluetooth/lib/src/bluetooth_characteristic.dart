@@ -243,7 +243,7 @@ class BluetoothCharacteristic {
     }
 
     // check
-    if (!kIsWeb && !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       assert(forceIndications == false, "Only Android supports forcing indications");
     }
 

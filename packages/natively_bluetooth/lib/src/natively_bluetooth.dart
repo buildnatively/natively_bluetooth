@@ -99,11 +99,11 @@ class NativelyBluetooth {
   static Stream<String> get logs => NativelyBluetoothPlatform.logs;
 
   /// Set configurable options
-  ///   - [showPowerAlert] Whether to show the power alert (iOS & MacOS only). i.e. CBCentralManagerOptionShowPowerAlertKey
+  ///   - [showPowerAlert] Whether to show the power alert (iOS only). i.e. CBCentralManagerOptionShowPowerAlertKey
   ///       To set this option you must call this method before any other method in this package.
   ///       See: https://developer.apple.com/documentation/corebluetooth/cbcentralmanageroptionshowpoweralertkey
   ///       This option has no effect on Android.
-  ///   - [restoreState] Whether to opt into state restoration (iOS & MacOS only). i.e. CBCentralManagerOptionRestoreIdentifierKey
+  ///   - [restoreState] Whether to opt into state restoration (iOS only). i.e. CBCentralManagerOptionRestoreIdentifierKey
   ///       To set this option you must call this method before any other method in this package.
   ///       See Apple Documentation for more details. This option has no effect on Android.
   static Future<void> setOptions({
@@ -211,9 +211,6 @@ class NativelyBluetooth {
   ///        dependent on the your Bluetooth stack implementation.
   ///   - [androidScanMode] choose the android scan mode to use when scanning
   ///   - [androidUsesFineLocation] request `ACCESS_FINE_LOCATION` permission at runtime
-  ///   - [webOptionalServices] the [optional services](https://developer.mozilla.org/en-US/docs/Web/API/Bluetooth/requestDevice#optionalservices)
-  ///     for the web target. Required to [access device services](https://webbluetoothcg.github.io/web-bluetooth/#dom-requestdeviceoptions-optionalservices)
-  ///     when scanning without [withServices] parameter.
   static Future<void> startScan({
     List<Guid> withServices = const [],
     List<String> withRemoteIds = const [],
@@ -230,7 +227,6 @@ class NativelyBluetooth {
     AndroidScanMode androidScanMode = AndroidScanMode.lowLatency,
     bool androidUsesFineLocation = false,
     bool androidCheckLocationServices = true,
-    List<Guid> webOptionalServices = const [],
   }) async {
     // check args
     assert(removeIfGone == null || continuousUpdates, "removeIfGone requires continuousUpdates");
@@ -247,7 +243,7 @@ class NativelyBluetooth {
     // Note: `withKeywords` is not compatible with other filters on android
     // because it is implemented in custom bluetooth code, not android code, and the
     // android 'name' filter is only available as of android sdk 33 (August 2022)
-    assert(!(!kIsWeb && Platform.isAndroid && withKeywords.isNotEmpty && hasOtherFilter),
+    assert(!(Platform.isAndroid && withKeywords.isNotEmpty && hasOtherFilter),
         "withKeywords is not compatible with other filters on Android");
 
     // only allow a single task to call
@@ -276,8 +272,7 @@ class NativelyBluetooth {
           androidLegacy: androidLegacy,
           androidScanMode: androidScanMode.value,
           androidUsesFineLocation: androidUsesFineLocation,
-          androidCheckLocationServices: androidCheckLocationServices,
-          webOptionalServices: webOptionalServices);
+          androidCheckLocationServices: androidCheckLocationServices);
 
       Stream<BmScanResponse> responseStream = NativelyBluetoothPlatform.instance.onScanResponse;
 
@@ -403,7 +398,7 @@ class NativelyBluetooth {
   /// Request Bluetooth PHY support
   static Future<PhySupport> getPhySupport() async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(
           ErrorPlatform.bluetooth, "getPhySupport", BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -419,7 +414,7 @@ class NativelyBluetooth {
     _initialized = true;
 
     // android only
-    if (!kIsWeb && Platform.isAndroid) {
+    if (Platform.isAndroid) {
       NativelyBluetoothPlatform.instance.onDetachedFromEngine.listen((r) {
         _stopScan(invokePlatform: false);
       });
@@ -469,7 +464,7 @@ class NativelyBluetooth {
           // do not clear `bondState`, for faster performance.
 
           // autoconnect
-          if (!kIsWeb && Platform.isAndroid == false) {
+          if (Platform.isIOS) {
             if (_autoConnect.contains(r.remoteId)) {
               if (_adapterStateNow == BmAdapterStateEnum.on) {
                 var d = BluetoothDevice(remoteId: r.remoteId);
@@ -734,7 +729,7 @@ class ScanResult {
 class AdvertisementData {
   final String advName;
   final int? txPowerLevel;
-  final int? appearance; // not supported on iOS / macOS
+  final int? appearance; // not supported on iOS
   final bool connectable;
   final Map<int, List<int>> manufacturerData; // key: manufacturerId
   final Map<Guid, List<int>> serviceData; // key: service guid
@@ -793,19 +788,13 @@ enum ErrorPlatform {
   bluetooth,
   android,
   apple,
-  linux,
-  web,
 }
 
 final ErrorPlatform _nativeError = (() {
-  if (kIsWeb) {
-    return ErrorPlatform.web;
-  } else if (Platform.isAndroid) {
+  if (Platform.isAndroid) {
     return ErrorPlatform.android;
-  } else if (Platform.isIOS || Platform.isMacOS) {
+  } else if (Platform.isIOS) {
     return ErrorPlatform.apple;
-  } else if (Platform.isLinux) {
-    return ErrorPlatform.linux;
   } else {
     return ErrorPlatform.bluetooth;
   }

@@ -134,7 +134,7 @@ class BluetoothDevice {
       Future<BmConnectionStateResponse> futureState = responseStream.first;
 
       // record connection time
-      if (!kIsWeb && Platform.isAndroid) {
+      if (Platform.isAndroid) {
         NativelyBluetooth._connectTimestamp[remoteId] = DateTime.now();
       }
 
@@ -180,7 +180,7 @@ class BluetoothDevice {
     }
 
     // request larger mtu
-    if (!kIsWeb && Platform.isAndroid && isConnected && mtu != null) {
+    if (Platform.isAndroid && isConnected && mtu != null) {
       await requestMtu(mtu);
     }
   }
@@ -236,7 +236,7 @@ class BluetoothDevice {
             .bluetoothTimeout(timeout, "disconnect");
       }
 
-      if (!kIsWeb && Platform.isAndroid) {
+      if (Platform.isAndroid) {
         // Disconnected, remove connect timestamp
         NativelyBluetooth._connectTimestamp.remove(remoteId);
       }
@@ -300,10 +300,10 @@ class BluetoothDevice {
       mtx.give();
     }
 
-    // in order to match iOS behavior on all platforms (except web),
+    // in order to match iOS behavior on Android,
     // we always listen to the Services Changed characteristic if it exists.
     if (subscribeToServicesChanged) {
-      if (!kIsWeb && !Platform.isIOS && !Platform.isMacOS) {
+      if (!Platform.isIOS) {
         BluetoothCharacteristic? c = _servicesChangedCharacteristic;
         if (c != null &&
             (c.properties.notify || c.properties.indicate) &&
@@ -421,7 +421,7 @@ class BluetoothDevice {
   Future<int> requestMtu(int desiredMtu,
       {double predelay = 0.35, int timeout = 15}) async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(ErrorPlatform.bluetooth, "requestMtu",
           BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -492,7 +492,7 @@ class BluetoothDevice {
   Future<void> requestConnectionPriority(
       {required ConnectionPriority connectionPriorityRequest}) async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(
           ErrorPlatform.bluetooth,
           "requestConnectionPriority",
@@ -530,7 +530,7 @@ class BluetoothDevice {
     required PhyCoding option,
   }) async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(ErrorPlatform.bluetooth, "setPreferredPhy",
           BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -557,7 +557,7 @@ class BluetoothDevice {
   /// Note! calling this is usually not necessary!! The platform does it automatically.
   Future<void> createBond({int timeout = 90, Uint8List? pin}) async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(ErrorPlatform.bluetooth, "createBond",
           BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -607,7 +607,7 @@ class BluetoothDevice {
   /// Remove bond (Android Only)
   Future<void> removeBond({int timeout = 30}) async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(ErrorPlatform.bluetooth, "removeBond",
           BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -649,7 +649,7 @@ class BluetoothDevice {
   /// Refresh ble services & characteristics (Android Only)
   Future<void> clearGattCache() async {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(ErrorPlatform.bluetooth, "clearGattCache",
           BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -668,7 +668,7 @@ class BluetoothDevice {
   /// Get the current bondState of the device (Android Only)
   Stream<BluetoothBondState> get bondState async* {
     // check android
-    if (kIsWeb || !Platform.isAndroid) {
+    if (!Platform.isAndroid) {
       throw NativelyBluetoothException(ErrorPlatform.bluetooth, "bondState",
           BluetoothErrorCode.androidOnly.index, "android-only");
     }
@@ -713,7 +713,7 @@ class BluetoothDevice {
   /// so Bluetooth will have no idea this connection is active. Adding a delay fixes this issue.
   /// https://issuetracker.google.com/issues/37121040
   Future<void> _ensureAndroidDisconnectionDelay(int androidDelay) async {
-    if (!kIsWeb && Platform.isAndroid) {
+    if (Platform.isAndroid) {
       if (NativelyBluetooth._connectTimestamp.containsKey(remoteId)) {
         Duration minGap = Duration(milliseconds: androidDelay);
         Duration elapsed = DateTime.now()
