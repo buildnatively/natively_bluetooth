@@ -15,7 +15,6 @@ dependencies:
 
   natively_bluetooth:
     # Note: We use a path dependency because the example app & plugin are bundled together.
-    # In *your* app you should use ^1.17.3 or similar
     path: ../
 
 dev_dependencies:

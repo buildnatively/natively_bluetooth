@@ -1,8 +1,32 @@
-name: natively_bluetooth_workspace
-publish_to: none
+name: natively_bluetooth
+description: Flutter plugin for connecting and communicating with Bluetooth Low Energy devices.
+version: 1.35.6
+workspace:
+  - example
+homepage: https://github.com/buildnatively/natively_bluetooth
 
 environment:
   sdk: ^3.6.0
+  flutter: '>=3.7.0'
 
-workspace:
-  - packages/natively_bluetooth
+dependencies:
+  flutter:
+    sdk: flutter
+
+dev_dependencies:
+  flutter_lints: ^5.0.0
+  flutter_test:
+    sdk: flutter
+
+flutter:
+  plugin:
+    platforms:
+      android:
+        package: com.lib.natively_bluetooth
+        pluginClass: NativelyBluetoothPlugin
+        dartPluginClass: NativelyBluetoothAndroid
+        dartFileName: src/natively_bluetooth_android.dart
+      ios:
+        pluginClass: NativelyBluetoothPlugin
+        dartPluginClass: NativelyBluetoothIOS
+        dartFileName: src/natively_bluetooth_ios.dart

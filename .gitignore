@@ -8,6 +8,7 @@
 .buildlog/
 .history
 .svn/
+migrate_working_dir/
 
 # IntelliJ related
 *.iml
@@ -27,8 +28,10 @@
 /example/ios/Podfile.lock
 **/doc/api/
 .dart_tool/
+.flutter-plugins
+.flutter-plugins-dependencies
 .packages
 build/
 .pub/
 
-/packages/natively_bluetooth/example/android/app/.cxx/
+/example/android/app/.cxx/
